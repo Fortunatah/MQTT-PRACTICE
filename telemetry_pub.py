@@ -26,7 +26,7 @@ try:
     while True:
         ## get the current cpu temperature from above
         cpu_temp = get_cpu_temp()
-        topic = "/home/living_room/temperature"
+        topic = "home/living_room/temperature"
         payload = str(cpu_temp)
 
         print(f"Publishing: {payload} to topic: {topic}")
