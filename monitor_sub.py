@@ -10,8 +10,8 @@ def on_connect( client , userdata, flags , rc):
         print("Successfully connected to broker")
         # Subscribing to a single level wilcard topic at Qos1
         # QoS1 = Gurantees at least one delivery
-        client.subscribe("home/+/temperature" , qos=1)
-        print("Subscribed to topic: home/+/temperature")
+        client.subscribe("home/#" , qos=1)
+        print("Subscribed to topic: home/#")
     else: # if connection failed
         print(f"Connection failed with code {rc}")
 

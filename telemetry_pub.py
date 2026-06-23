@@ -15,13 +15,21 @@ def get_cpu_temp():
 ## Create a client instance enforcing MQTT 3.1.1
 client = mqtt.Client(client_id="Pi_temp_publisher" , protocol=mqtt.MQTTv311 )
 
+## Configure last will and testament
+client.will_set(
+    topic="home/living_room/status",
+    payload="offline",
+    qos=1,
+    retain=True
+)
 ## Connecting to the local broker
 print("Connecting publisher to local broker...")
 client.connect("localhost" , 1883, keepalive=60)
 
 client.loop_start()
 print("Publisher is running. Press Ctrl+C to stop.")
-
+# Right after connecting, let everyone know we are alive and well
+client.publish("home/living_room/status", payload="online", qos=1, retain=True)
 try:
     while True:
         ## get the current cpu temperature from above
